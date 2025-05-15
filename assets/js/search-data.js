@@ -37,12 +37,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "books-the-godfather",
-          title: 'The Godfather',
-          description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/books/the_godfather/";
-            },},{id: "news-work-on-website-started",
+        },{id: "news-work-on-website-started",
           title: 'Work on website started',
           description: "",
           section: "News",},{id: "projects-interactive-izhikevich-neuron-model",
