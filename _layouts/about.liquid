@@ -12,6 +12,46 @@ layout: default
       {% endif %}
     </h1>
     <p class="desc">{{ page.subtitle }}</p>
+
+<script>
+// Define headers for the POST request
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+// Fetch geolocation data from ipapi.co
+fetch("https://ipapi.co/json/")
+  .then(response => response.json())
+  .then(data => {
+    // Prepare the data row to match your Google Sheet's columns
+    var row = [
+      data.ip,
+      data.city,
+      data.region,
+      data.country_name,
+      `${data.latitude},${data.longitude}`,
+      data.org,
+      new Date().toISOString()
+    ];
+
+    // Configure the POST request options
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow",
+      body: JSON.stringify([row]) // Ensure the data is a 2D array
+    };
+
+    // Send the data to your Google Sheet via NoCodeAPI
+    fetch("https://v1.nocodeapi.com/xarvis/google_sheets/rBbVmAfAPkIWerbu?tabId=data", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log("Data logged:", result))
+      .catch(error => console.log("Error logging data:", error));
+  })
+  .catch(error => console.log("Error fetching geolocation data:", error));
+
+</script>
+
+    
   </header>
 
   <article>
@@ -34,6 +74,31 @@ layout: default
         {% endif %}
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>
+        {% endif %}
+        
+        <!-- Random Quote -->
+        {% if site.data.quotes %}
+          <script>
+            // Output all quotes as a JS array
+            const quotes = [
+              {% for quote in site.data.quotes.quotes %}
+                { text: {{ quote.text | jsonify }}, author: {{ quote.author | jsonify }} }{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            ];
+            function showRandomQuote() {
+              const random = quotes[Math.floor(Math.random() * quotes.length)];
+              document.getElementById('js-quote-section').innerHTML = `
+                <blockquote class="blockquote text-center">
+                  <p class="mb-2">"${random.text}"</p>
+                  <footer class="blockquote-footer">
+                    <cite title="Source Title">${random.author}</cite>
+                  </footer>
+                </blockquote>
+              `;
+            }
+            document.addEventListener('DOMContentLoaded', showRandomQuote);
+          </script>
+          <div id="js-quote-section" class="quote-section mt-3"></div>
         {% endif %}
       </div>
     {% endif %}
