@@ -37,7 +37,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "news-work-on-website-started",
+        },{id: "post-quick-introduction-to-renormalisation",
+        
+          title: "Quick Introduction to Renormalisation",
+        
+        description: "renormalisation without QED, field theory...",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/Renormalisation/";
+          
+        },
+      },{id: "post-terminal-shortcuts",
+        
+          title: "Terminal shortcuts",
+        
+        description: "How to pause terminal?",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/terminal/";
+          
+        },
+      },{id: "news-work-on-website-started",
           title: 'Work on website started',
           description: "",
           section: "News",},{id: "projects-interactive-izhikevich-neuron-model",
