@@ -131,6 +131,7 @@ Hence,
 
 <details>
 <summary>
+(click to see detailed calculation)
 \begin{equation}
 \boxed{
 F(x) = g_R + \alpha g_R^2 \ln\left( \frac{\mu}{x} \right) + \mathcal{O}(g_R^3)
@@ -164,7 +165,7 @@ $$ -->
 
 # Conventions
 
-1. Write
+Write
 
 $$
 \begin{equation}
@@ -245,11 +246,12 @@ F(x) = g_R + g_R^2 \left( F_1^R(x) - F_1^R(\mu) \right)
 \end{equation}
 $$
 
-as the singular parts are $ x $ independent and cancel.
+as the singular parts are $ x $ independent and cancel (correct upto second order).
 
 ---
 
-## 3rd order in $ g $ (without specific form of function)
+<details>
+<summary><strong>3rd order in \( g \) (click to expand)</strong></summary>
 
 $$
 \begin{equation}
@@ -330,7 +332,7 @@ F_2^S(x) = F_1^S + 2 F_1^S F_1^R(x)
 \end{equation}
 $$
 
-Finally we arrive at the correct result upto second order
+Finally we arrive at the correct result upto third order
 
 $$
 \begin{equation}
@@ -340,6 +342,9 @@ $$
 }
 \end{equation}
 $$
+
+</details>
+
 
 ---
 # Takeaway

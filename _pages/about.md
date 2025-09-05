@@ -1,8 +1,8 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>NISER</a>. Bhubaneswar. There's always a greater depth
+subtitle: <a href='#'>NISER</a>. Bhubaneswar.
 
 profile:
   align: right
@@ -28,4 +28,5 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Pritipriya Dasbehera is a undergrad that was created by a pan-dimensional, hyper-intelligent species of beings to come up with the Answer to The Ultimate Question of Life, the Universe, and Everything. Sadly, he has been misguided and is apprently doing physics at the moment. If you happen to meet him, please guide him to the true goal of existence.
+
+I’m Pritipriya Dasbehera, currently pursuing an Integrated Master’s in Physical Sciences with a minor in Computer Science at the National Institute of Science Education and Research (NISER), Bhubaneswar [2021-26]. My interest lies somewhere between physics and computation, exploring topics ranging from quantum many-body dynamics and condensed matter to machine learning and information theory. I have jumped across different fields over the years and gained a strong hold on Python and Julia. When not doing physics, I indulge in robotics and science communication.

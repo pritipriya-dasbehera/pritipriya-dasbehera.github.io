@@ -1,15 +1,13 @@
 ---
 layout: page
-title: Interactive Izhikevich Neuron Model
-description: Interactive visualization of neuronal spiking dynamics
+title: Izhikevich Neuron Model
+description: Visualisation of neuronal spiking dynamics
 img: assets/img/projects/izhikevich_plot-dark.png
-importance: 10
+importance: 5
 category: research
 chart:
   plotly: true
 ---
-
-## Izhikevich Neuron Model
 
 The Izhikevich model is a simple yet biologically plausible model of neuronal spiking dynamics. It is given by the equations:
 
@@ -270,7 +268,7 @@ function updateGraph() {
     <div class="col-md-10 mx-auto">
         <h3>About the Izhikevich Model</h3>
         <p>
-            The Izhikevich neuron model is a simplified model that can reproduce many different firing patterns observed in real neurons. 
+            The Izhikevich neuron model can reproduce many different firing patterns observed in real neurons. 
             Despite its computational simplicity compared to Hodgkin-Huxley-type models, it can reproduce various firing patterns by 
             adjusting just four parameters: a, b, c, and d.
         </p>
@@ -281,7 +279,7 @@ function updateGraph() {
             <li><strong>Parameter d:</strong> The after-spike reset of the recovery variable u.</li>
         </ul>
         <p>
-            The interactive visualization above allows you to adjust these parameters and observe how they affect the spiking behavior of the neuron.
+            The interactive visualisation above allows you to adjust these parameters and observe how they affect the spiking behavior of the neuron.
         </p>
     </div>
 </div>
