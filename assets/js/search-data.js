@@ -4,21 +4,21 @@ const ninja = document.querySelector('ninja-keys');
 // add the home and posts menu items
 ninja.data = [{
     id: "nav-about",
-    title: "about",
+    title: "About",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
     },
   },{id: "nav-blog",
-          title: "blog",
+          title: "Blog",
           description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/";
           },
         },{id: "nav-projects",
-          title: "projects",
-          description: "A growing collection of your cool projects.",
+          title: "Projects",
+          description: "A growing collection of cool projects",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -31,7 +31,7 @@ ninja.data = [{
             window.location.href = "/repositories/";
           },
         },{id: "nav-cv",
-          title: "cv",
+          title: "CV",
           description: "",
           section: "Navigation",
           handler: () => {
@@ -48,9 +48,9 @@ ninja.data = [{
             window.location.href = "/blog/2025/Renormalisation/";
           
         },
-      },{id: "post-terminal-shortcuts",
+      },{id: "post-terminal-shortcuts-linux",
         
-          title: "Terminal shortcuts",
+          title: "Terminal shortcuts (Linux)",
         
         description: "How to pause terminal?",
         section: "Posts",
@@ -62,11 +62,30 @@ ninja.data = [{
       },{id: "news-work-on-website-started",
           title: 'Work on website started',
           description: "",
-          section: "News",},{id: "projects-interactive-izhikevich-neuron-model",
-          title: 'Interactive Izhikevich Neuron Model',
-          description: "Interactive visualization of neuronal spiking dynamics",
+          section: "News",},{id: "news-participated-in-the-discussion-meeting-on-geometry-probability-and-algorithms-at-icts-from-12-may-2025-to-16-may-2025",
+          title: 'Participated in the discussion meeting on “Geometry, Probability and Algorithms” at ICTS from...',
+          description: "",
+          section: "News",},{id: "news-attended-the-iaifi-summer-school-2025-from-4-august-2025-to-8-august-2025",
+          title: 'Attended the IAIFI Summer School 2025 from 4 August 2025 to 8 August...',
+          description: "",
+          section: "News",},{id: "news-attending-the-asia-pacific-quantum-error-correction-talk-tutorial-series-from-20-august-2025-to-17-december-2025",
+          title: 'Attending the Asia-Pacific Quantum Error Correction talk/tutorial series from 20 August 2025 to...',
+          description: "",
+          section: "News",},{id: "projects-izhikevich-neuron-model",
+          title: 'Izhikevich Neuron Model',
+          description: "Visualisation of neuronal spiking dynamics",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Izhikevich/";
+            },},{id: "projects-liquid-gas-phase-transition",
+          title: 'Liquid-Gas Phase Transition',
+          description: "MCMC simulation of liquid-gas phase transitions",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/PhaseTransition/";
+            },},{id: "projects-vector-field-streamplot",
+          title: 'Vector Field Streamplot',
+          description: "Visualisation of vector fields and their streamlines",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Streamplot/";
             },},{
         id: 'social-email',
         title: 'email',
