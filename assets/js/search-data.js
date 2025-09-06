@@ -59,10 +59,7 @@ ninja.data = [{
             window.location.href = "/blog/2025/terminal/";
           
         },
-      },{id: "news-work-on-website-started",
-          title: 'Work on website started',
-          description: "",
-          section: "News",},{id: "news-participated-in-the-discussion-meeting-on-geometry-probability-and-algorithms-at-icts-from-12-may-2025-to-16-may-2025",
+      },{id: "news-participated-in-the-discussion-meeting-on-geometry-probability-and-algorithms-at-icts-from-12-may-2025-to-16-may-2025",
           title: 'Participated in the discussion meeting on “Geometry, Probability and Algorithms” at ICTS from...',
           description: "",
           section: "News",},{id: "news-attended-the-iaifi-summer-school-2025-from-4-august-2025-to-8-august-2025",
@@ -70,6 +67,9 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "news-attending-the-asia-pacific-quantum-error-correction-talk-tutorial-series-from-20-august-2025-to-17-december-2025",
           title: 'Attending the Asia-Pacific Quantum Error Correction talk/tutorial series from 20 August 2025 to...',
+          description: "",
+          section: "News",},{id: "news-the-simulation-of-liquid-gas-phase-transition-is-live-now-find-it-in-the-projects-section",
+          title: 'The simulation of liquid-gas phase transition is live now. Find it in the...',
           description: "",
           section: "News",},{id: "projects-izhikevich-neuron-model",
           title: 'Izhikevich Neuron Model',
