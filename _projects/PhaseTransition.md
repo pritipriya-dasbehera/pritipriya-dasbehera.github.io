@@ -45,7 +45,7 @@ chart:
                     <label class="fw-bold">MCMC Steps/Frame:</label>
                     <span id="steps-value" class="badge bg-info">150</span>
                 </div>
-                <input type="range" class="form-range" id="steps-slider" min="10" max="200" step="10" value="150">
+                <input type="range" class="form-range" id="steps-slider" min="10" max="400" step="10" value="150">
 
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-3">
                     <label class="fw-bold">Interaction Strength (ε):</label>
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Global variables
 let currentT = 0.567;
 let currentMu = -2;
-let currentEpsilon = 1.0; // ε = interaction strength (used for lattice gas)
+let currentEpsilon = 1.0;
 let isDragging = false;
 let phaseCanvas, systemCanvas;
 let phaseCtx, systemCtx;
@@ -197,25 +197,21 @@ let animationId;
 
 // MCMC System parameters
 const GRID_SIZE = 80;
-const LATTICE_Z = 4; // coordination number for square lattice
+const LATTICE_Z = 4;
 let lattice = [];
-let mcmcSteps = 50;
+let mcmcSteps = 150;
 let totalSteps = 0;
 let acceptedMoves = 0;
 
-// Physical constants / helpers
-const ISING_TC_COEFF = 2 / Math.log(1 + Math.sqrt(2)); // ≈ 2.269185...
-// For 2D square Ising: k_B T_c / J_Ising = 2 / ln(1 + sqrt(2))
+// Physical constants
+const ISING_TC_COEFF = 2 / Math.log(1 + Math.sqrt(2));
 
 function computeCriticalTemp(epsilon) {
-    // Mapping: J_Ising = ε / 4  (from lattice gas ↔ Ising mapping)
     const J_ising = epsilon / 4.0;
     return ISING_TC_COEFF * J_ising;
 }
 
 function computeCriticalMu(epsilon) {
-    // At h = 0 (Ising field = 0) correspond to μ_c = - ε * z / 2
-    // (derived from mapping: h = ε z / 4 + μ/2, set h=0 => μ = -ε z / 2)
     return -epsilon * (LATTICE_Z / 2.0);
 }
 
@@ -231,13 +227,8 @@ function initializePhaseTransition() {
     systemCanvas.width = 300;
     systemCanvas.height = 300;
 
-    // Initialize lattice
     initializeLattice();
-
-    // Add event listeners
     setupEventListeners();
-
-    // Start simulation
     drawPhaseDiagram();
     startSimulation();
 }
@@ -263,9 +254,6 @@ function setupEventListeners() {
     document.getElementById('interaction-slider').addEventListener('input', function() {
         currentEpsilon = parseFloat(this.value);
         document.getElementById('interaction-value').textContent = currentEpsilon.toFixed(1);
-
-        // If user moves ε, update critical markers and, if the red point was set to "Tc/μc", we should leave
-        // the current point as-is but redraw critical line for the new ε.
         drawPhaseDiagram();
     });
 
@@ -281,7 +269,6 @@ function initializeLattice() {
     for (let i = 0; i < GRID_SIZE; i++) {
         lattice[i] = [];
         for (let j = 0; j < GRID_SIZE; j++) {
-            // Random initialization (50% occupancy)
             lattice[i][j] = Math.random() > 0.5 ? 1 : 0;
         }
     }
@@ -300,16 +287,11 @@ function coordsToPhysical(x, y) {
     const Ymax = 0;
     const Yscale = 4;
 
-    // T range: 0.5 to 5.0, μ range: -3 to 3 (kept for UI; μc will be shown relative to ε)
-    // const T = 0.5 + (canvasX / phaseCanvas.width) * 4.5;
     const T = Xmin + (canvasX / phaseCanvas.width) * Xscale;
-    // const mu = 3.0 - (canvasY / phaseCanvas.height) * 6.0;
     const mu = Ymax - (canvasY / phaseCanvas.height) * Yscale;
 
     return {
-        // T: Math.max(0.5, Math.min(5.0, T)),
         T: Math.max(Xmin, Math.min(Xmin+Xscale, T)),
-        // mu: Math.max(-3.0, Math.min(3.0, mu))
         mu: Math.max(Ymax-Yscale, Math.min(Ymax, mu))
     };
 }
@@ -321,9 +303,7 @@ function physicalToCanvas(T, mu) {
     const Ymax = 0;
     const Yscale = 4;
 
-    // const x = ((T - 0.5) / 4.5) * phaseCanvas.width;
     const x = ((T - Xmin) / Xscale) * phaseCanvas.width;
-    // const y = (1 - (mu + 3.0) / 6.0) * phaseCanvas.height;
     const y = ((Ymax - mu) / Yscale) * phaseCanvas.height;
     return { x, y };
 }
@@ -372,16 +352,13 @@ function setPreset(T, mu) {
 function setCriticalPreset() {
     const Tc = computeCriticalTemp(currentEpsilon);
     const muc = computeCriticalMu(currentEpsilon);
-    // If Tc is outside the visual T-range, clamp; but typically Tc should be within UI range for ε ~ O(1).
 
     const Xmin = 0;
     const Xscale = 1;
     const Ymax = 0;
     const Yscale = 4;
 
-    // currentT = Math.max(0.5, Math.min(5.0, Tc));
     currentT = Math.max(Xmin, Math.min(Xmin+Xscale, T));
-    // currentMu = Math.max(-3.0, Math.min(3.0, muc));
     currentMu = Math.max(Ymax-Yscale, Math.min(Ymax, mu));
     drawPhaseDiagram();
     initializeLattice();
@@ -419,62 +396,53 @@ function drawPhaseDiagram() {
         phaseCtx.stroke();
     }
 
-    // Compute and draw critical temperature line based on current ε
     const Tc = computeCriticalTemp(currentEpsilon);
     const muc = computeCriticalMu(currentEpsilon);
 
-    // Only draw vertical Tc line if within T-range visualized
-    // if (Tc >= 0.5 && Tc <= 5.0) {
     if (Tc >= Xmin && Tc <= Xmin + Xscale && muc >= Ymax - Yscale && muc <= Ymax) {
         const startPos = physicalToCanvas(0, muc);
         const endPos   = physicalToCanvas(Tc, muc);
 
         phaseCtx.strokeStyle = '#ff6b35';
         phaseCtx.lineWidth = 2;
-        phaseCtx.setLineDash([]); // solid line
+        phaseCtx.setLineDash([]);
         phaseCtx.beginPath();
         phaseCtx.moveTo(startPos.x, startPos.y);
         phaseCtx.lineTo(endPos.x, endPos.y);
         phaseCtx.stroke();
 
-        // Label Tc on the right end
         phaseCtx.fillStyle = textColor;
         phaseCtx.font = '12px Arial';
         phaseCtx.fillText('Tc(ε)=' + Tc.toFixed(3), endPos.x - 30, endPos.y + 12);
 
-        // Label μc on the left end
         phaseCtx.fillText('μc(ε)=' + muc.toFixed(3), endPos.x - 30, startPos.y - 6);
     }
 
-    // Draw axis labels
+    // axis labels
     phaseCtx.fillStyle = textColor;
     phaseCtx.font = '12px Arial';
     phaseCtx.fillText('T', phaseCanvas.width - 15, phaseCanvas.height - 5);
     phaseCtx.fillText('μ', 5, 15);
-
-    // Phase region labels (qualitative)
     phaseCtx.font = '14px Arial';
-    phaseCtx.fillText('HIGH μ (disordered / gas-like)', phaseCanvas.width * 0.05, phaseCanvas.height * 0.2);
-    phaseCtx.fillText('LOW μ (ordered / liquid-like)', phaseCanvas.width * 0.05, phaseCanvas.height * 0.8);
+    phaseCtx.fillText('HIGH μ (ordered / liquid-like)', phaseCanvas.width * 0.05, phaseCanvas.height * 0.2);
+    phaseCtx.fillText('LOW μ (disordered / gas-like)', phaseCanvas.width * 0.05, phaseCanvas.height * 0.8);
 
-    // Draw current point
+    // current point
     const pos = physicalToCanvas(currentT, currentMu);
     phaseCtx.fillStyle = '#ff4444';
     phaseCtx.beginPath();
     phaseCtx.arc(pos.x, pos.y, 8, 0, 2 * Math.PI);
     phaseCtx.fill();
 
-    // White border for visibility
     phaseCtx.strokeStyle = '#ffffff';
     phaseCtx.lineWidth = 2;
     phaseCtx.stroke();
 
-    // Update labels
     document.getElementById('temp-value').textContent = currentT.toFixed(3);
     document.getElementById('mu-value').textContent = currentMu.toFixed(3);
 }
 
-// MCMC Metropolis Algorithm (lattice gas)
+// MCMC
 function getNeighbors(i, j) {
     const neighbors = [];
     neighbors.push([(i + 1) % GRID_SIZE, j]);
@@ -493,9 +461,6 @@ function calculateLocalEnergy(i, j) {
         neighborSum += lattice[ni][nj];
     }
 
-    // Lattice gas Hamiltonian (local contribution):
-    // H_i = - ε * n_i * (sum_neighbors n_j) - μ * n_i
-    // (note: total energy will be divided by 2 later to avoid double counting pairs)
     return -currentEpsilon * state * neighborSum - currentMu * state;
 }
 
@@ -506,7 +471,7 @@ function calculateTotalEnergy() {
             totalEnergy += calculateLocalEnergy(i, j);
         }
     }
-    return totalEnergy / 2; // Avoid double counting pair interactions
+    return totalEnergy / 2;
 }
 
 function mcmcStep() {
@@ -526,12 +491,9 @@ function mcmcStep() {
         const newEnergy = calculateLocalEnergy(i, j);
         const deltaE = newEnergy - currentEnergy;
 
-        // Metropolis acceptance criterion (T is in same energy units; k_B=1)
         if (deltaE <= 0 || Math.random() < Math.exp(-deltaE / currentT)) {
-            // Accept the move
             accepted++;
         } else {
-            // Reject the move
             lattice[i][j] = currentState;
         }
 
@@ -563,7 +525,7 @@ function updateSystemCanvas() {
     for (let i = 0; i < GRID_SIZE; i++) {
         for (let j = 0; j < GRID_SIZE; j++) {
             if (lattice[i][j] === 1) {
-                systemCtx.fillStyle = '#000000';
+                systemCtx.fillStyle = '#000000ff';
                 systemCtx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
             }
         }
@@ -580,11 +542,10 @@ function updateStatistics() {
     document.getElementById('acceptance-rate').textContent = acceptanceRate.toFixed(1) + '%';
     document.getElementById('mcmc-step').textContent = totalSteps;
 
-    // Determine phase (very rough heuristic for display only)
     let phase = 'Mixed';
     if (density < 0.2) phase = 'Gas';
     else if (density > 0.8) phase = 'Liquid';
-    else if (Math.abs(currentT - computeCriticalTemp(currentEpsilon)) < 0.15) phase = 'Critical';
+    else if ((Math.abs(currentT/computeCriticalTemp(currentEpsilon) - 1) < 0.05) && (Math.abs(currentMu/computeCriticalMu(currentEpsilon) - 1) < 0.05)) phase = 'Critical';
 
     const phaseLabel = document.getElementById('phase-label');
     phaseLabel.textContent = phase;
@@ -610,3 +571,8 @@ function startSimulation() {
     animate();
 }
 </script>
+
+
+<br>
+
+This has been inspired by [Vilas Winstein's guest video in the 3Blue1Brown](https://youtu.be/itRV2jEtV8Q?si=e8rYumrp084o68jN) youtube channel.
