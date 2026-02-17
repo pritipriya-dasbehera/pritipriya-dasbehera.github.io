@@ -2,7 +2,7 @@
 layout: page
 title: Liquid-Gas Phase Transition
 description: MCMC simulation of liquid-gas phase transitions
-img: assets/img/projects/phase-transition.gif
+img: assets/img/projects/phase-transition-small2.gif
 importance: 8
 category: research
 chart:
@@ -45,7 +45,7 @@ chart:
                     <label class="fw-bold">MCMC Steps/Frame:</label>
                     <span id="steps-value" class="badge bg-info">150</span>
                 </div>
-                <input type="range" class="form-range" id="steps-slider" min="10" max="400" step="10" value="150">
+                <input type="range" class="form-range" id="steps-slider" min="10" max="2000" step="10" value="150">
 
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-3">
                     <label class="fw-bold">Interaction Strength (ε):</label>

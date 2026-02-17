@@ -6,7 +6,7 @@
     "email": "pritipriya.dasbehera@niser.ac.in",
     "phone": "",
     "url": "https://pritipriya-dasbehera.github.io",
-    "summary": "Physics graduate student with strong interest and experience in quantum physics, computational methods, and machine learning. Passionate about scientific communication and robotics.",
+    "summary": "Physics graduate student interested in understanding quantum many-body theory by employing tools and techniques from diverse fields, including quantum computation and quantum information. Passionate about scientific communication and robotics.",
     "location": {
       "address": "",
       "postalCode": "",
@@ -33,28 +33,38 @@
       "endDate": "",
       "score": "9.48",
       "courses": [
+        "Quantum Computation and Quantum Information",
+        "Advanced Solid state physics",
+        "Phase Transition and Renormalisation",
+        "Non-linear Dynamics and Chaos",
         "Quantum Field Theory",
         "Many-body Physics",
-        "Condensed Matter",
         "Statistical Mechanics",
         "Graph Theory",
         "Machine Learning",
         "Algorithm Design"
       ]
-    },
-    {
-      "institution": "Kendriya Vidyalaya Balasore",
-      "location": "Odisha, India",
-      "url": "",
-      "area": "High School",
-      "studyType": "CBSE",
-      "startDate": "2011-08-01",
-      "endDate": "2021-05-01",
-      "score": "12th: 96.8%, 10th: 98%",
-      "courses": []
     }
   ],
-  "work": [
+  "research articles": [
+    {
+      "name": "Distance by de-correlation: Computing distance with heterogeneous grid cells",
+      "authors": "Pritipriya Dasbehera, Akshunna S. Dogra, and William T. Redman",
+      "publisher": "arXiv",
+      "releaseDate": "2025-08-11",
+      "url":"https://arxiv.org/abs/2511.08292"}
+  ],
+  "research experience": [
+    {
+      "name": "National Institute of Science Education and Research",
+      "position": "Thesis Project – Entanglement nature of spin models",
+      "location": "Bhubaneswar, India",
+      "url": "https://www.niser.ac.in",
+      "startDate": "2025-08-01",
+      "endDate": "present",
+      "summary": "relating one tangle, two tangle and quantum Fisher information to magnetization and correlation; study of entanglement in 1D XXZ model and XX model with z-field; supervised by Dr. Anamitra Mukherjee.",
+      "highlights": []
+    },
     {
       "name": "National Institute of Science Education and Research",
       "position": "Pre-thesis Project – Quantum Many-body Dynamics",
@@ -71,7 +81,7 @@
       "location": "Remote",
       "url": "https://github.com/MathePhysics",
       "startDate": "2024-06-01",
-      "endDate": "2024-08-01",
+      "endDate": "2025-11-01",
       "summary": "Worked under Akshunna S. Dogra and Dr. William T. Redman; analyzed distance information from variability of grid cell parameters.",
       "highlights": []
     },
@@ -96,7 +106,15 @@
       "highlights": []
     }
   ],
-    "projects": [
+    "university projects": [
+    {
+      "name": "Machine Learning Renormalisation Group (MLRG)",
+      "summary": "use of ML to perform RG  and construct RG flow without prior knowledge of critical parameters; based on the paper by Hou and You (2023), supervised by Dr. Sumedha. ",
+      "highlights": [],
+      "startDate": "2024-08-01",
+      "endDate": "2024-11-01",
+      "url": ""
+    },
     {
       "name": "Anderson Impurity Problem",
       "summary": "Study of dynamics of electrons in metals doped with impurities; included different Born approximations and Feynman diagrams.",
@@ -112,7 +130,9 @@
       "startDate": "2024-08-01",
       "endDate": "2024-11-01",
       "url": ""
-    },
+    }
+  ],
+  "extra uni proj": [
     {
       "name": "Machine learning for wavefunction dynamics",
       "summary": "Reconstruction and prediction of probability densities using PINNs and regression.",
@@ -177,7 +197,6 @@
     }
   ],
   "certificates": [],
-  "publications": [],
   "skills": [
     {
       "name": "Programming",
@@ -224,7 +243,7 @@
     {
       "name": "Stargazing",
       "icon": "",
-      "keywords": ["Enjoying night sky"]
+      "keywords": ["enjoy night walks"]
     },
     {
       "name": "Reading",
@@ -237,5 +256,31 @@
       "keywords": ["Promoting physics to school students"]
     }
   ],
-  "references": []
+  "co-curricular experience": [
+    {
+      "name": "NISER Robotics Club",
+      "startDate": "2021",
+      "endDate": "2024",
+      "position": "Vice president",
+      "url": "",
+      "summary": "Organized workshops and events to promote robotics; mentored students in building 8-bit computer",
+      "highlights": []
+    },
+    {
+      "name": "Informal Teaching Activities",
+      "startDate": "2023",
+      "endDate": "2024",
+      "url": "",
+      "summary": "Undergraduate physics to 1st and 2nd year students; Python programming to 1st year students",
+      "highlights": []
+    },
+    {
+      "name": "Outreach Activities",
+      "startDate": "2022",
+      "endDate": "2023",
+      "url": "",
+      "summary": " Volunteer in NISER Open Day (outreach for school students); Conducted the physics session in NISER Open Day",
+      "highlights": []
+    }
+  ]
 }
